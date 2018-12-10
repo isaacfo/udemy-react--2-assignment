@@ -19,7 +19,7 @@ inputChangedHandler = (event) => {
 }
 
 
-//  6.
+//  6. update the userInput
 deleteCharHandler = (index) => {
   // bring in the inputted string and then converts into array by split
   const text = this.state.userInput.split('');
@@ -36,11 +36,13 @@ deleteCharHandler = (index) => {
 
 
   render() {
-    const charList = this.state.userInput.split('').map((char, index) => {
+    // 5. bring in the inputted string and then converts into array by split. split converts the string into js array .map to convert into another array
+    // index argument/{key} fixes key error in console, not optimal, but will use in this exercise
+    const charList = this.state.userInput.split('').map((ch, index) => {
       return <Char 
-      character={char} 
+      character={ch} 
       key={index}
-      // 6.
+      // 6. clicked is prop of Char and clicked has anonymous func to make deleteCharhandler execute when called at index
       clicked={() => this.deleteCharHandler(index)} />;
     });
 
@@ -58,10 +60,14 @@ deleteCharHandler = (index) => {
         <hr/>
         {/* 1. */}
         <input type="text" 
+        // two-way binding, reflects latest value in the input in value =
         onChange={this.inputChangedHandler}
         value={this.state.userInput}/>
+        {/* makes the inputed text appear under the input box */}
         <p>{this.state.userInput}</p>
+        {/* 2. inputLength is the prop here */}
         <Validation inputLength={this.state.userInput.length}/>
+        {/* 5. charlist is the variable tht is rendered here, which is defined above*/}
         {charList}
       </div>
     );
